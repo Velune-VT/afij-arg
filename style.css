@@ -167,3 +167,42 @@ button,input{font:inherit}
  .action-dock{height:68px;gap:7px;padding:10px 8px}
  .action-dock button{min-width:0;flex:1;max-width:130px;padding:10px 7px;font-size:9px}
 }
+
+
+/* === Carrd seamless blend overrides === */
+html, body {
+  background: transparent !important;
+}
+
+#game {
+  background: transparent !important;
+}
+
+/* The control strip itself has no panel/background/border.
+   Only the three buttons remain visible over Carrd. */
+.action-dock {
+  background: transparent !important;
+  border-top: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Fade the illustrated renderer into transparency around all four edges.
+   Carrd underneath the iframe can show through the feathered perimeter. */
+#game {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3.5%, #000 96.5%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3.5%, #000 96.5%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Keep modal/ARG overlays readable and unaffected by the renderer fade. */
+.overlay {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
