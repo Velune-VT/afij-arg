@@ -110,6 +110,17 @@
  <button type="button" data-action="wonder">Wonder</button>
 </div>
 
+
+<div class="overlay" id="actionModal" onclick="if(event.target.id==='actionModal')closeActionModal()">
+  <div class="panel">
+    <button class="close" type="button" onclick="closeActionModal()">×</button>
+    <div class="kick" id="actionRoom"></div>
+    <h2 class="room-action-title" id="actionTitle"></h2>
+    <div class="room-action-lead" id="actionLead"></div>
+    <div class="room-action-body" id="actionBody"></div>
+  </div>
+</div>
+
 <div class="overlay" id="modal" onclick="if(event.target.id==='modal')closeModal()"><div class="panel"><button class="close" onclick="closeModal()">×</button><div class="kick" id="mk"></div><h2 id="mt"></h2><div id="mb"></div></div></div>
 <div class="overlay" id="zoom"><div class="panel"><button class="close" style="z-index:10" onclick="closeZoom()">×</button><div class="corkbig">
  <button class="znote z1" onclick="inspect(0)"><b>BLUE FEATHER</b><br><br>Recovered beside the sealed platform.</button>

@@ -501,3 +501,156 @@ body {
     linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%) !important;
   mask-composite: intersect;
 }
+
+
+/* ============================================================
+   CARRD BLEED + ROOM ACTION PASS
+   ============================================================ */
+
+/* The iframe/page shell itself is truly transparent. */
+html,
+body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body {
+  min-height: 100%;
+}
+
+/* Reserve the bottom area for actions, but don't paint behind it. */
+#game {
+  background: transparent !important;
+  background-color: transparent !important;
+  overflow: visible !important;
+
+  /* IMPORTANT:
+     Remove the mask from the entire game. Masking #game also fades/clips
+     the action region. We now feather each room renderer instead. */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* The room viewport is transparent. */
+.scene {
+  background: transparent !important;
+  background-color: transparent !important;
+  overflow: hidden !important;
+}
+
+/* Feather ONLY the illustrated room canvas.
+   This leaves true transparency around the edges and beneath the controls. */
+.scene .world {
+  -webkit-mask-image:
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0,0,0,.18) 1.5%,
+      #000 6%,
+      #000 94%,
+      rgba(0,0,0,.18) 98.5%,
+      transparent 100%),
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.18) 1.5%,
+      #000 7%,
+      #000 91%,
+      rgba(0,0,0,.18) 97.5%,
+      transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0,0,0,.18) 1.5%,
+      #000 6%,
+      #000 94%,
+      rgba(0,0,0,.18) 98.5%,
+      transparent 100%),
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.18) 1.5%,
+      #000 7%,
+      #000 91%,
+      rgba(0,0,0,.18) 97.5%,
+      transparent 100%);
+  mask-composite: intersect;
+}
+
+/* The vignette should also fade with the room, not make a rectangular panel. */
+.scene::after {
+  background:
+    radial-gradient(circle at 50% 44%,
+      transparent 44%,
+      rgba(0,0,0,.08) 69%,
+      rgba(0,0,0,.34) 96%) !important;
+  pointer-events: none !important;
+}
+
+/* Completely open area behind the three controls. */
+.action-dock {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Buttons themselves remain readable, but do not create a large bar. */
+.action-dock button {
+  background: rgba(12,12,16,.26) !important;
+  border-color: rgba(214,184,126,.38) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.action-dock button:hover,
+.action-dock button:focus-visible {
+  background: rgba(58,45,34,.40) !important;
+  border-color: rgba(225,194,135,.62) !important;
+}
+
+/* Room-action popup: visually lighter than archive lore modals,
+   so it feels like a response from the room itself. */
+#actionModal {
+  background: rgba(4,5,8,.42) !important;
+}
+
+#actionModal .panel {
+  width: min(690px, 90vw);
+  background: rgba(15,15,20,.92);
+  border-color: rgba(229,207,166,.24);
+}
+
+#actionModal .room-action-title {
+  margin: 0 42px 6px 0;
+  font-size: 23px;
+  font-weight: normal;
+  color: #efe2cd;
+}
+
+#actionModal .room-action-lead {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #e5d8c4;
+  font-style: italic;
+}
+
+#actionModal .room-action-body {
+  color: #cfc3b2;
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+#actionModal .room-action-body strong {
+  color: #efe1c8;
+}
+
+/* Ensure the transparent action area is not accidentally occupied
+   by the renderer on smaller layouts. */
+@media(max-width:560px){
+  .action-dock {
+    background: transparent !important;
+  }
+}

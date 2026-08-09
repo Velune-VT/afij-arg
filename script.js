@@ -1,4 +1,124 @@
 
+/* ============================================================
+   EXAMINE / READ / WONDER — ROOM-SPECIFIC CONTENT
+   ============================================================ */
+const roomActions = {
+  cabinet: {
+    room: 'Archive',
+    examine: {
+      title: 'Examine',
+      lead: 'You examine the archive.',
+      body: `Tall cabinets line the walls, their labels worn by age. Some drawers sit neatly closed. Others look as if they have been opened too many times by hands that knew exactly what they were searching for.`
+    },
+    read: {
+      title: 'Read',
+      lead: 'You pull a record from the cabinet.',
+      body: `<strong>A Flight in June</strong> follows twin detectives Leona and Benjamin Friest as they leave Veridia for the industrial city of Monochrome to investigate a string of disappearances.<br><br>The deeper they look, the more the case begins to connect to Brassheart Syndrome, forgotten gods, ancient spirits, and a city determined to bury its own history.`
+    },
+    wonder: {
+      title: 'Wonder',
+      lead: 'You pause for a moment.',
+      body: `Every story begins somewhere. This one chose an archive.`
+    }
+  },
+
+  observatory: {
+    room: 'Observatory',
+    examine: {
+      title: 'Examine',
+      lead: 'You examine the observatory.',
+      body: `Beyond the great window, Monochrome glows beneath a restless night sky. The constellations above seem almost deliberate, as if someone arranged them to be remembered.`
+    },
+    read: {
+      title: 'Read',
+      lead: 'You read an old astronomical journal.',
+      body: `The heavens preserve the names of the gods: Liliana, goddess of springs; Asteria, goddess of stars and war; and Cyrus, the fallen sun.<br><br>Their symbols remain: flower, star, and eclipse.`
+    },
+    wonder: {
+      title: 'Wonder',
+      lead: 'You stare into the night sky.',
+      body: `Thousands of stars watch the city below. Whether they care is another question.`
+    }
+  },
+
+  office: {
+    room: 'Office',
+    examine: {
+      title: 'Examine',
+      lead: 'You examine the investigation office.',
+      body: `Photographs, notes, and newspaper clippings cover the corkboard. Thin strings connect details that should not belong together.`
+    },
+    read: {
+      title: 'Read',
+      lead: 'You pick up a case file left open upon the desk.',
+      body: `This office contains ongoing investigations, small puzzle pieces, hidden details, and eventually secrets waiting to be uncovered.<br><br>For now, the corkboard remains quiet.`
+    },
+    wonder: {
+      title: 'Wonder',
+      lead: 'You study the corkboard in silence.',
+      body: `Someone was trying very hard to connect these pieces together. Someone else was trying harder to keep them apart.`
+    }
+  },
+
+  balcony: {
+    room: 'Balcony',
+    examine: {
+      title: 'Examine',
+      lead: 'You step onto the balcony.',
+      body: `Rain drifts across the rooftops of Monochrome. Far below, lamps burn in distant windows while the city continues turning beneath the clouds.`
+    },
+    read: {
+      title: 'Read',
+      lead: 'You look for something to read.',
+      body: `There are no records here.<br><br>Some places exist simply to be visited.`
+    },
+    wonder: {
+      title: 'Wonder',
+      lead: 'You lean against the railing.',
+      body: `The city feels endless from up here.`
+    }
+  },
+
+  library: {
+    room: 'Library',
+    examine: {
+      title: 'Examine',
+      lead: 'You examine the library.',
+      body: `Shelves stretch toward the ceiling, packed with records, journals, maps, and histories. Some books are carefully cataloged. Others seem to have been placed here in a hurry.`
+    },
+    read: {
+      title: 'Read',
+      lead: 'You read a note left upon the desk.',
+      body: `The library contains records on characters, locations, spirits, artifacts, timeline events, and the world of <strong>A Flight in June</strong>.<br><br>Some shelves are open. Others are waiting for the story to catch up.`
+    },
+    wonder: {
+      title: 'Wonder',
+      lead: 'You glance across the shelves.',
+      body: `Some books feel older than the city itself. Some feel like they are still being written.`
+    }
+  }
+};
+
+function openActionModal(action){
+  const current = document.querySelector('.scene.active');
+  if(!current) return;
+
+  const room = roomActions[current.id];
+  if(!room || !room[action]) return;
+
+  const entry = room[action];
+  document.getElementById('actionRoom').textContent = room.room;
+  document.getElementById('actionTitle').textContent = entry.title;
+  document.getElementById('actionLead').textContent = entry.lead;
+  document.getElementById('actionBody').innerHTML = entry.body;
+  document.getElementById('actionModal').classList.add('show');
+}
+
+function closeActionModal(){
+  document.getElementById('actionModal').classList.remove('show');
+}
+
+
 /* Defensive interaction setup */
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.drawer,.book.interactive,.hot').forEach(el=>{
@@ -126,7 +246,7 @@ const cityFar=document.getElementById('cityFar');
 /* modal */
 function openModal(t,body,k='Archive entry'){document.getElementById('mt').textContent=t;document.getElementById('mk').textContent=k;document.getElementById('mb').innerHTML='<p>'+body+'</p>';document.getElementById('modal').classList.add('show')}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeZoom()}})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeZoom();closeActionModal()}})
 
 /* library */
 const interactive=new Set([1,3,6,8,11,14,16,19,22,24,27,29,31,34,36,39,42,44,47,49,52,54,57,59,62,64,67,69,72,74,77,79,82,84,87,89,92,94,97,99]);
@@ -160,10 +280,11 @@ function inspect(i){argState.clues[i]=true;localStorage.setItem('afijStoryARG',J
 function checkARG(){const v=(document.getElementById('argAnswer').value||'').trim().toUpperCase();if(!argState.clues.every(Boolean)){document.getElementById('argstatus').textContent='Inspect all three primary evidence cards first.';return}if(v==='ECLIPSE'){argState.solved=true;localStorage.setItem('afijStoryARG',JSON.stringify(argState));document.getElementById('argstatus').textContent='Case unlocked. Drawer VI will now open.'}else document.getElementById('argstatus').textContent='The keyword does not match the evidence.'}
 function updateARG(){document.getElementById('argstatus').textContent=argState.solved?'Case unlocked. Drawer VI recognizes the answer.':'Inspect the three primary evidence cards. Progress is saved.'}
 
-document.querySelectorAll('.action-dock button').forEach(button=>{
- button.addEventListener('click',()=>{
-  const current=document.querySelector('.scene.active');
-  if(!current)return;
-  current.dispatchEvent(new CustomEvent('roomaction',{detail:{action:button.dataset.action}}));
- });
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.action-dock button').forEach(button=>{
+    button.addEventListener('click',()=>{
+      openActionModal(button.dataset.action);
+    });
+  });
 });
