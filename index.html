@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="dark">
 <title>AFIJ Storybook Rooms</title>
 <style id="afij-transparency-bootstrap">
 html,body{margin:0;background:transparent!important;background-color:transparent!important}
@@ -14,7 +13,8 @@ html,body{margin:0;background:transparent!important;background-color:transparent
 <div id="game">
 
  <section id="office" class="scene">
-  <div class="world">
+  <div class="room-renderer">
+<div class="world">
    <div class="office-bg"></div><div class="beam"></div><div class="walltrim"></div>
    <div class="crooked-beam cb1"></div><div class="crooked-beam cb2"></div>
    <div class="office-window"></div>
@@ -29,11 +29,13 @@ html,body{margin:0;background:transparent!important;background-color:transparent
    <button id="oh2" class="hot" onclick="openModal('The Desk','Reports. Railway schedules. Three empty coffee cups. Whoever owns this desk has not slept much.','Examine')"></button>
    <button id="oh3" class="hot" onclick="openModal('Office Window','Monochrome glitters beyond the glass. From this height, it is easy to forget people are disappearing.','Examine')"></button>
   </div>
+  </div>
   <button class="edge left" onclick="go('cabinet')">‹<b>Cabinet</b></button>
  </section>
 
  <section id="observatory" class="scene">
-  <div class="world">
+  <div class="room-renderer">
+<div class="world">
    <div class="obs-bg"></div><div class="dome"></div><div class="obs-floor"></div>
    <div class="orrery"><i></i><i></i><i></i></div>
    <div class="obs-chart chart-a"></div><div class="obs-chart chart-b"></div>
@@ -45,11 +47,13 @@ html,body{margin:0;background:transparent!important;background-color:transparent
    <button id="ch3" class="hot" onclick="openModal('Cyrus — The Broken Crown','Cyrus appears highest during eclipse season. The oldest charts depict a crown with one missing point: power severed from grace.','Constellation record')"></button>
    <button id="th" class="hot" onclick="openModal('The Telescope','Through the telescope, one star is missing from the official chart. Someone scratched a tiny arrow into the brass casing.','Examine')"></button>
   </div>
+  </div>
   <button class="edge up" onclick="go('cabinet')">⌃<b>Cabinet</b></button>
  </section>
 
  <section id="balcony" class="scene">
-  <div class="world">
+  <div class="room-renderer">
+<div class="world">
    <div class="bal-bg"></div>
    <div class="bal-arch"></div><div class="bal-lantern bl-left"></div><div class="bal-lantern bl-right"></div>
    <div class="city farcity" id="cityFar"></div><div class="city" id="city"></div>
@@ -60,11 +64,13 @@ html,body{margin:0;background:transparent!important;background-color:transparent
    <button id="bh1" class="hot" onclick="openModal('Monochrome at Night','The capital looks almost peaceful from here: railway lights, layered rooftops, distant smoke, and the sea beyond the cliff.','Observe')"></button>
    <button id="bh2" class="hot" onclick="openModal('A Ribbon Beneath the Rail','A faded ribbon is tied beneath the railing where it cannot be seen from inside. Its knot matches one drawn on the office corkboard.','Hidden detail')"></button>
   </div>
+  </div>
   <button class="edge down" onclick="go('cabinet')">⌄<b>Cabinet</b></button>
  </section>
 
  <section id="library" class="scene">
-  <div class="world">
+  <div class="room-renderer">
+<div class="world">
    <div class="lib-bg"></div>
    <div class="lib-window"><i></i><i></i></div>
    <div class="banner ban-a"></div><div class="banner ban-b"></div>
@@ -77,11 +83,13 @@ html,body{margin:0;background:transparent!important;background-color:transparent
    <div class="dust" data-dust="18"></div>
    <button id="lh" class="hot" onclick="openModal('The Book Left Open','The page describes a railway superstition: “Never answer your own name if it is called from an empty carriage.” A handwritten note underneath adds: “He answered anyway.”','Desk volume')"></button>
   </div>
+  </div>
   <button class="edge right" onclick="go('cabinet')">›<b>Cabinet</b></button>
  </section>
 
  <section id="cabinet" class="scene active">
-  <div class="world">
+  <div class="room-renderer">
+<div class="world">
    <div class="cab-bg"></div>
    <div class="archive-arch"></div>
    <div class="sidecab l"></div><div class="sidecab r"></div>
@@ -97,6 +105,7 @@ html,body{margin:0;background:transparent!important;background-color:transparent
     <button class="drawer" onclick="drawer(5)"><span class="handle"></span><span class="taglab">CASE V</span></button>
     <button class="drawer" onclick="drawer(6)"><span class="handle"></span><span class="taglab">SEALED</span></button>
    </div><div class="dust" data-dust="10"></div>
+  </div>
   </div> 
   <button class="edge left" onclick="go('library')">‹<b>Library</b></button>
   <button class="edge right" onclick="go('office')">›<b>Office</b></button>

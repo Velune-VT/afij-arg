@@ -686,3 +686,139 @@ body::after,
 .action-dock{height:68px;gap:7px;padding:10px 8px;background: transparent !important;}
 
 #game{height: calc(100vh - 68px) !important;}}
+
+
+/* ============================================================
+   FINAL CARRD TRANSPARENCY FIX
+   ============================================================ */
+
+:root {
+  color-scheme: normal !important;
+}
+
+html,
+body {
+  background: rgba(0,0,0,0) !important;
+  background-color: rgba(0,0,0,0) !important;
+}
+
+/* Nothing at document level is allowed to paint the iframe canvas. */
+body,
+#game,
+.scene,
+#office,
+#observatory,
+#balcony,
+#library,
+#cabinet {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Fixed visible renderer.
+   This is what gets feathered, so the fade is actually INSIDE the viewport. */
+.room-renderer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 82% at 50% 47%,
+    #000 0%,
+    #000 68%,
+    rgba(0,0,0,.96) 74%,
+    rgba(0,0,0,.76) 81%,
+    rgba(0,0,0,.42) 89%,
+    rgba(0,0,0,.14) 95%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 78% 82% at 50% 47%,
+    #000 0%,
+    #000 68%,
+    rgba(0,0,0,.96) 74%,
+    rgba(0,0,0,.76) 81%,
+    rgba(0,0,0,.42) 89%,
+    rgba(0,0,0,.14) 95%,
+    transparent 100%
+  );
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* The world remains oversized for mouse-look, but no longer owns the mask. */
+.room-renderer .world {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  pointer-events: none;
+}
+
+/* Interactive children inside the panning world must still receive clicks. */
+.room-renderer .hot,
+.room-renderer .cabmain,
+.room-renderer .stackL,
+.room-renderer .stackR,
+.room-renderer .drawer,
+.room-renderer .book.interactive {
+  pointer-events: auto !important;
+}
+
+/* Navigation is outside the renderer wrapper and remains crisp/clickable. */
+.edge {
+  z-index: 140 !important;
+}
+
+/* The bottom 76px is literally empty canvas except for the buttons. */
+.action-dock,
+.action-dock::before,
+.action-dock::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Remove any accidental pseudo-canvas. */
+html::before,
+html::after,
+body::before,
+body::after,
+#game::before,
+#game::after {
+  content: none !important;
+  background: transparent !important;
+}
+
+/* Keep buttons as the only painted objects in the lower strip. */
+.action-dock button {
+  background: rgba(10,10,14,.10) !important;
+}
+
+/* Mobile uses the same visible in-frame fade. */
+@media (max-width: 560px) {
+  .room-renderer {
+    -webkit-mask-image: radial-gradient(
+      ellipse 84% 86% at 50% 47%,
+      #000 0%,
+      #000 68%,
+      rgba(0,0,0,.88) 79%,
+      rgba(0,0,0,.42) 89%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 84% 86% at 50% 47%,
+      #000 0%,
+      #000 68%,
+      rgba(0,0,0,.88) 79%,
+      rgba(0,0,0,.42) 89%,
+      transparent 100%
+    );
+  }
+}
