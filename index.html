@@ -12,7 +12,13 @@
 
  <section id="office" class="scene">
   <div class="world">
-   <div class="office-bg"></div><div class="beam"></div><div class="walltrim"></div><div class="office-window"></div>
+   <div class="office-bg"></div><div class="beam"></div><div class="walltrim"></div>
+   <div class="crooked-beam cb1"></div><div class="crooked-beam cb2"></div>
+   <div class="office-window"></div>
+   <div class="wall-clock"><i></i><b></b></div>
+   <div class="portrait p-one"></div><div class="portrait p-two"></div>
+   <div class="filetower ft-one"></div><div class="filetower ft-two"></div>
+   <div class="little-plant"></div>
    <div class="office-cork"><div class="pin a">VICTIM 01<br><br>Rail receipt</div><div class="pin b">NORTHSHIRE<br><br>Observatory map</div><div class="pin c">?</div><div class="pin d">Witness statement</div><div class="pin e">Blue feather</div><span class="red r1"></span><span class="red r2"></span><span class="red r3"></span></div>
    <div class="desk"><div class="paperpile"></div><div class="cup"></div><div class="lamp flicker"></div></div><div class="office-fg"></div>
    <div class="dust" data-dust="12"></div>
@@ -26,6 +32,9 @@
  <section id="observatory" class="scene">
   <div class="world">
    <div class="obs-bg"></div><div class="dome"></div><div class="obs-floor"></div>
+   <div class="orrery"><i></i><i></i><i></i></div>
+   <div class="obs-chart chart-a"></div><div class="obs-chart chart-b"></div>
+   <div class="obs-books"></div><div class="obs-railing"></div>
    <div class="const ca"><i class="twinkle"></i><i></i><i></i></div><div class="const cb"><i></i><i class="twinkle"></i><i></i></div><div class="const cc"><i></i><i></i><i class="twinkle"></i></div>
    <div class="tele"><div class="tube"></div><div class="leg l1"></div><div class="leg l2"></div><div class="leg l3"></div></div><div class="dust" data-dust="9"></div>
    <button id="ch1" class="hot" onclick="openModal('Liliana — The Lantern Sister','Sailors say Liliana’s stars brighten when someone is searching for a way home. Her constellation is associated with mercy, memory, and what people choose to preserve.','Constellation record')"><span>Liliana</span></button>
@@ -38,7 +47,12 @@
 
  <section id="balcony" class="scene">
   <div class="world">
-   <div class="bal-bg"></div><div class="city" id="city"></div><div class="train"></div><div class="rail"></div><div class="floor"></div><div class="curtL"></div><div class="curtR"></div>
+   <div class="bal-bg"></div>
+   <div class="bal-arch"></div><div class="bal-lantern bl-left"></div><div class="bal-lantern bl-right"></div>
+   <div class="city farcity" id="cityFar"></div><div class="city" id="city"></div>
+   <div class="train"></div><div class="rail"></div><div class="floor"></div>
+   <div class="roof-foreground rf-left"></div><div class="roof-foreground rf-right"></div>
+   <div class="curtL"></div><div class="curtR"></div>
    <div class="smoke" style="left:34%;bottom:34%;width:90px;height:90px"></div><div class="smoke" style="left:62%;bottom:37%;width:70px;height:70px;animation-delay:-4s"></div>
    <button id="bh1" class="hot" onclick="openModal('Monochrome at Night','The capital looks almost peaceful from here: railway lights, layered rooftops, distant smoke, and the sea beyond the cliff.','Observe')"><span>Observe City</span></button>
    <button id="bh2" class="hot" onclick="openModal('A Ribbon Beneath the Rail','A faded ribbon is tied beneath the railing where it cannot be seen from inside. Its knot matches one drawn on the office corkboard.','Hidden detail')"><span>Examine Railing</span></button>
@@ -48,7 +62,16 @@
 
  <section id="library" class="scene">
   <div class="world">
-   <div class="lib-bg"></div><div class="stackL" id="leftShelf"></div><div class="stackR" id="rightShelf"></div><div class="centerhall"></div><div class="ladder"></div><div class="liblamp flicker"></div><div class="libdesk"><div class="openbook"></div></div><div class="dust" data-dust="14"></div>
+   <div class="lib-bg"></div>
+   <div class="lib-window"><i></i><i></i></div>
+   <div class="banner ban-a"></div><div class="banner ban-b"></div>
+   <div class="frame-art"></div>
+   <div class="stackL" id="leftShelf"></div><div class="stackR" id="rightShelf"></div>
+   <div class="centerhall"></div><div class="ladder"></div>
+   <div class="lib-rug"></div>
+   <div class="foreground-books fb-left"></div><div class="foreground-books fb-right"></div>
+   <div class="liblamp flicker"></div><div class="libdesk"><div class="openbook"></div><div class="quill"></div><div class="desk-stack"></div></div>
+   <div class="dust" data-dust="18"></div>
    <button id="lh" class="hot" onclick="openModal('The Book Left Open','The page describes a railway superstition: “Never answer your own name if it is called from an empty carriage.” A handwritten note underneath adds: “He answered anyway.”','Desk volume')"><span>Read Open Book</span></button>
   </div>
   <button class="edge right" onclick="go('cabinet')">›<b>Cabinet</b></button>
@@ -56,7 +79,13 @@
 
  <section id="cabinet" class="scene active">
   <div class="world">
-   <div class="cab-bg"></div><div class="sidecab l"></div><div class="sidecab r"></div><div class="hanglamp flicker"></div>
+   <div class="cab-bg"></div>
+   <div class="archive-arch"></div>
+   <div class="sidecab l"></div><div class="sidecab r"></div>
+   <div class="archive-box ab-one"></div><div class="archive-box ab-two"></div>
+   <div class="loose-folder lf-one"></div><div class="loose-folder lf-two"></div>
+   <div class="tiny-clock"></div>
+   <div class="hanglamp flicker"></div>
    <div class="cabmain">
     <button class="drawer" onclick="drawer(1)"><span class="handle"></span><span class="taglab">CASE I</span></button>
     <button class="drawer" onclick="drawer(2)"><span class="handle"></span><span class="taglab">CASE II</span></button>

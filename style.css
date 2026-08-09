@@ -206,3 +206,153 @@ html, body {
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }
+
+
+/* ============================================================
+   STORYBOOK / EXPANSIVE CAMERA PASS
+   The room canvas is deliberately larger than the viewport.
+   Moving the pointer pans across it like a point-and-click scene.
+   ============================================================ */
+
+.scene { overflow:hidden; }
+
+.world{
+  inset:-12% -11% -13% -11% !important;
+  transform:translate3d(var(--cam-x,0px),var(--cam-y,0px),0) scale(1.015) !important;
+  transition:none !important;
+  will-change:transform;
+}
+
+/* Slightly different "lens" depths per room. */
+#office .world{inset:-11% -13% -12% -12% !important}
+#observatory .world{inset:-14% -12% -14% -12% !important}
+#balcony .world{inset:-12% -15% -13% -15% !important}
+#library .world{inset:-11% -16% -12% -16% !important}
+#cabinet .world{inset:-12% -13% -13% -13% !important}
+
+/* Soft painted paper/grain impression without external assets. */
+.scene .world:after{
+  content:"";
+  position:absolute;inset:0;z-index:45;pointer-events:none;
+  opacity:.18;
+  background:
+    repeating-linear-gradient(7deg,rgba(255,255,255,.025) 0 1px,transparent 1px 5px),
+    repeating-linear-gradient(97deg,rgba(0,0,0,.035) 0 1px,transparent 1px 7px);
+  mix-blend-mode:soft-light;
+}
+
+/* More irregular, illustrated outlines. */
+.office-cork,.desk,.office-window,.cabmain,.stackL,.stackR,.libdesk,.dome{
+  filter:drop-shadow(0 13px 18px rgba(0,0,0,.34));
+}
+.office-cork{transform:rotate(-1.6deg) skewY(-.4deg)}
+.desk{transform:perspective(760px) rotateX(7deg) rotateZ(-1.1deg)}
+.libdesk{transform:rotate(.5deg)}
+.cabmain{transform:translate(-50%,-50%) rotate(-.35deg)}
+
+/* ---------------- OFFICE PERSONALITY ---------------- */
+.crooked-beam{position:absolute;z-index:8;background:#181217;box-shadow:0 8px 20px #0006}
+.cb1{left:2%;top:3%;width:45%;height:18px;transform:rotate(-3deg)}
+.cb2{right:-2%;top:7%;width:37%;height:16px;transform:rotate(4deg)}
+.wall-clock{
+ position:absolute;left:47%;top:13%;width:82px;height:82px;border-radius:50%;
+ background:#b79a6c;border:8px solid #35261f;box-shadow:0 7px 18px #0007;z-index:12
+}
+.wall-clock:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#d4c9ae}
+.wall-clock i,.wall-clock b{position:absolute;left:50%;top:50%;z-index:2;display:block;background:#49392f;transform-origin:left center}
+.wall-clock i{width:23px;height:3px;transform:rotate(22deg)}
+.wall-clock b{width:18px;height:3px;transform:rotate(-78deg)}
+.portrait{position:absolute;z-index:11;border:7px solid #493225;background:linear-gradient(145deg,#25212a,#51424a);box-shadow:0 8px 19px #0007}
+.portrait:after{content:"";position:absolute;left:30%;right:30%;top:18%;bottom:18%;border-radius:50% 50% 42% 42%;background:rgba(220,202,172,.15)}
+.p-one{left:46%;top:31%;width:72px;height:94px;transform:rotate(2deg)}
+.p-two{left:55%;top:25%;width:58px;height:76px;transform:rotate(-4deg)}
+.filetower{position:absolute;z-index:16;width:78px;height:72px;background:repeating-linear-gradient(0deg,#5d4230 0 12px,#251a16 12px 15px);box-shadow:0 8px 18px #0007}
+.ft-one{right:27%;bottom:10%;transform:rotate(3deg)}
+.ft-two{left:7%;bottom:5%;height:92px;transform:rotate(-5deg)}
+.little-plant{position:absolute;left:17%;bottom:9%;z-index:15;width:54px;height:45px;border-radius:0 0 45% 45%;background:#5b4638}
+.little-plant:before,.little-plant:after{content:"";position:absolute;bottom:30px;width:22px;height:42px;border-radius:70% 10% 70% 10%;background:#314037}
+.little-plant:before{left:7px;transform:rotate(-29deg)}.little-plant:after{right:5px;transform:scaleX(-1) rotate(-25deg)}
+
+/* ---------------- OBSERVATORY PERSONALITY ---------------- */
+.orrery{position:absolute;left:10%;bottom:18%;z-index:18;width:150px;height:150px;border:5px solid #745f43;border-radius:50%;transform:rotate(-12deg);box-shadow:inset 0 0 0 14px rgba(117,96,68,.12)}
+.orrery:before,.orrery:after{content:"";position:absolute;left:50%;top:50%;border:3px solid #8c734d;border-radius:50%;transform:translate(-50%,-50%) rotate(55deg)}
+.orrery:before{width:112px;height:42px}.orrery:after{width:44px;height:118px}
+.orrery i{position:absolute;width:12px;height:12px;border-radius:50%;background:#d0a65d;box-shadow:0 0 9px #d0a65d66}
+.orrery i:nth-child(1){left:12px;top:66px}.orrery i:nth-child(2){right:18px;top:28px}.orrery i:nth-child(3){left:76px;bottom:8px}
+.obs-chart{position:absolute;z-index:12;width:90px;height:126px;background:#d4c6a3;border:8px solid #352920;box-shadow:0 10px 22px #0008}
+.obs-chart:after{content:"✦  ·  ✧  ·  ✦\A  ╲  │  ╱\A    ✧";white-space:pre;position:absolute;inset:18px;color:#695b4a;text-align:center;line-height:2}
+.chart-a{right:9%;bottom:19%;transform:rotate(4deg)}.chart-b{right:18%;bottom:15%;transform:rotate(-5deg);opacity:.72}
+.obs-books{position:absolute;right:6%;bottom:8%;z-index:16;width:145px;height:72px;background:repeating-linear-gradient(0deg,#5c3f31 0 13px,#1e1718 13px 16px);transform:rotate(3deg)}
+.obs-railing{position:absolute;left:24%;right:18%;bottom:19%;height:66px;border-top:6px solid #44362c;z-index:10}
+.obs-railing:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 56px,#44362c 56px 61px)}
+
+/* ---------------- BALCONY PERSONALITY ---------------- */
+.bal-arch{position:absolute;left:2%;right:2%;top:-12%;height:82%;z-index:8;border:30px solid rgba(20,17,22,.86);border-bottom:0;border-radius:50% 50% 0 0;pointer-events:none}
+.bal-lantern{position:absolute;top:18%;z-index:29;width:42px;height:70px;background:linear-gradient(90deg,#3d3025,#8b6c43,#3d3025);clip-path:polygon(20% 0,80% 0,100% 30%,84% 90%,16% 90%,0 30%);filter:drop-shadow(0 0 20px rgba(232,181,88,.34))}
+.bal-lantern:after{content:"";position:absolute;left:12px;right:12px;top:22px;bottom:20px;background:#dcae5a;box-shadow:0 0 18px #dcae5a99}
+.bl-left{left:10%;transform:rotate(-2deg)}.bl-right{right:10%;transform:rotate(3deg)}
+.farcity{bottom:26% !important;height:37% !important;opacity:.38;filter:blur(1.2px);transform:scaleX(1.05)}
+.farcity .bld{background:#202334}
+.roof-foreground{position:absolute;bottom:8%;z-index:21;width:27%;height:24%;background:#151318;clip-path:polygon(0 35%,38% 0,100% 24%,100% 100%,0 100%)}
+.rf-left{left:-3%;transform:rotate(-2deg)}.rf-right{right:-4%;transform:scaleX(-1) rotate(-2deg)}
+
+/* ---------------- LIBRARY PERSONALITY ---------------- */
+.lib-window{
+ position:absolute;left:39%;top:5%;width:24%;height:48%;z-index:7;
+ background:linear-gradient(#141830,#34315b 70%,#171725);
+ border:13px solid #2c201b;
+ clip-path:polygon(50% 0,94% 20%,100% 100%,0 100%,6% 20%);
+ box-shadow:0 0 45px rgba(96,89,159,.12)
+}
+.lib-window:before,.lib-window:after{content:"";position:absolute;background:#2c201b}
+.lib-window:before{left:49%;top:15%;width:4%;height:85%}.lib-window:after{left:4%;right:4%;top:54%;height:4%}
+.lib-window i{position:absolute;width:4px;height:4px;border-radius:50%;background:#f5e1ad;box-shadow:0 0 8px #fff}
+.lib-window i:first-child{left:26%;top:27%}.lib-window i:last-child{right:22%;top:18%}
+.banner{position:absolute;top:10%;z-index:10;width:45px;height:140px;background:#43334a;border-top:7px solid #aa854c;clip-path:polygon(0 0,100% 0,100% 82%,50% 100%,0 82%)}
+.banner:after{content:"✦";position:absolute;left:0;right:0;top:45px;text-align:center;color:#b99758;font-size:18px}
+.ban-a{right:25%;transform:rotate(2deg)}.ban-b{right:19%;top:14%;height:118px;transform:rotate(-3deg)}
+.frame-art{position:absolute;right:7%;top:25%;z-index:10;width:92px;height:122px;border:9px solid #493223;background:linear-gradient(145deg,#17151a,#39313d);transform:rotate(2deg)}
+.frame-art:after{content:"";position:absolute;left:27%;right:27%;top:20%;bottom:20%;background:#9f8b72;opacity:.12;border-radius:48% 48% 38% 38%}
+.lib-rug{position:absolute;left:31%;right:27%;bottom:3%;height:24%;z-index:6;background:#4a2730;border:8px solid #8b653a;transform:perspective(600px) rotateX(58deg);transform-origin:bottom;box-shadow:inset 0 0 0 6px #30212a}
+.foreground-books{position:absolute;bottom:-2%;z-index:28;width:175px;height:155px;background:repeating-linear-gradient(0deg,#51382e 0 23px,#171316 23px 28px);filter:drop-shadow(0 13px 14px #0009)}
+.fb-left{left:-2%;transform:rotate(-5deg)}.fb-right{right:-2%;height:125px;transform:rotate(6deg)}
+.quill{position:absolute;left:52%;top:-48px;width:5px;height:72px;background:#c2ae83;transform:rotate(24deg)}
+.quill:before{content:"";position:absolute;left:-10px;top:0;width:21px;height:48px;background:#d2c39d;clip-path:polygon(50% 0,100% 30%,58% 100%,42% 100%,0 30%)}
+.desk-stack{position:absolute;left:8%;top:-51px;width:94px;height:51px;background:repeating-linear-gradient(0deg,#5d4030 0 13px,#23191a 13px 17px);transform:rotate(-3deg)}
+
+/* ---------------- CABINET PERSONALITY ---------------- */
+.archive-arch{position:absolute;left:19%;right:19%;top:-15%;height:96%;z-index:5;border:28px solid #1a1519;border-bottom:0;border-radius:46% 46% 0 0;opacity:.8}
+.archive-box{position:absolute;z-index:19;width:130px;height:84px;background:#4d3b30;border:6px solid #2a201c;box-shadow:0 12px 22px #0008}
+.archive-box:before{content:"ARCHIVE";position:absolute;left:22px;right:22px;top:27px;background:#b9aa8b;color:#4a4034;text-align:center;font-size:10px;padding:4px}
+.ab-one{left:4%;bottom:5%;transform:rotate(-7deg)}.ab-two{right:5%;bottom:4%;transform:rotate(5deg);width:110px;height:72px}
+.loose-folder{position:absolute;z-index:21;width:92px;height:56px;background:#ad9873;clip-path:polygon(0 15%,38% 15%,44% 0,100% 0,100% 100%,0 100%);box-shadow:0 7px 13px #0006}
+.lf-one{left:15%;bottom:10%;transform:rotate(12deg)}.lf-two{right:17%;bottom:11%;transform:rotate(-8deg)}
+.tiny-clock{position:absolute;right:13%;top:14%;z-index:16;width:62px;height:62px;border-radius:50%;background:#c4b18b;border:7px solid #3d2e27;transform:rotate(3deg)}
+.tiny-clock:after{content:"";position:absolute;left:50%;top:50%;width:19px;height:3px;background:#4a3a31;transform:rotate(-30deg);transform-origin:left}
+
+/* Keep edge navigation anchored to the viewport, not the panning world. */
+.edge{z-index:90}
+
+/* Hover feels like investigating rather than highlighting a web button. */
+.hot:hover,.hot:focus-visible{
+  border-color:rgba(224,188,116,.24) !important;
+  background:radial-gradient(circle,rgba(232,196,125,.08),transparent 67%) !important;
+  box-shadow:0 0 42px rgba(218,169,83,.08) !important;
+}
+
+/* Carrd fade remains, but broaden it so the room feels softly vignetted into the page. */
+#game{
+  -webkit-mask-image:
+    linear-gradient(to right,transparent 0,#000 2.5%,#000 97.5%,transparent 100%),
+    linear-gradient(to bottom,transparent 0,#000 2.5%,#000 97%,transparent 100%) !important;
+  mask-image:
+    linear-gradient(to right,transparent 0,#000 2.5%,#000 97.5%,transparent 100%),
+    linear-gradient(to bottom,transparent 0,#000 2.5%,#000 97%,transparent 100%) !important;
+}
+
+/* Smaller screens get a reduced camera canvas so important objects remain reachable. */
+@media(max-width:760px){
+ .world{inset:-7% -8% -8% -8% !important}
+ #office .world,#observatory .world,#balcony .world,#library .world,#cabinet .world{inset:-7% -8% -8% -8% !important}
+ .wall-clock,.p-two,.chart-b,.ban-b,.frame-art{display:none}
+}

@@ -1,16 +1,87 @@
+
+/* ============================================================
+   EXPANSIVE POINT-AND-CLICK CAMERA
+   The pointer acts like the player's gaze. The room is larger
+   than the renderer, so moving toward an edge reveals more of it.
+   ============================================================ */
+const camera = {
+  targetX: 0, targetY: 0,
+  currentX: 0, currentY: 0,
+  pointerX: .5, pointerY: .5,
+  running: true
+};
+
+function cameraLimits(){
+  const w = window.innerWidth;
+  const h = Math.max(1, document.getElementById('game').clientHeight);
+  const mobile = w < 760;
+  return {
+    x: mobile ? Math.min(42,w*.055) : Math.min(150,w*.115),
+    y: mobile ? Math.min(28,h*.05) : Math.min(86,h*.105)
+  };
+}
+
+function updateCameraTarget(clientX, clientY){
+  const game = document.getElementById('game');
+  const rect = game.getBoundingClientRect();
+  if(!rect.width || !rect.height) return;
+
+  const nx = Math.max(0,Math.min(1,(clientX-rect.left)/rect.width));
+  const ny = Math.max(0,Math.min(1,(clientY-rect.top)/rect.height));
+  camera.pointerX = nx;
+  camera.pointerY = ny;
+
+  const lim = cameraLimits();
+
+  // Cursor right => the "camera" looks right => room canvas moves left.
+  // The gentle eased curve leaves the center calmer and makes edges more exploratory.
+  const dx = (nx-.5)*2;
+  const dy = (ny-.5)*2;
+  const easedX = Math.sign(dx)*Math.pow(Math.abs(dx),1.25);
+  const easedY = Math.sign(dy)*Math.pow(Math.abs(dy),1.35);
+
+  camera.targetX = -easedX*lim.x;
+  camera.targetY = -easedY*lim.y;
+}
+
+document.addEventListener('pointermove',e=>updateCameraTarget(e.clientX,e.clientY),{passive:true});
+
+document.addEventListener('pointerleave',()=>{
+  camera.targetX *= .35;
+  camera.targetY *= .35;
+});
+
+function animateCamera(){
+  const active = document.querySelector('.scene.active .world');
+  camera.currentX += (camera.targetX-camera.currentX)*.075;
+  camera.currentY += (camera.targetY-camera.currentY)*.075;
+
+  if(active){
+    active.style.setProperty('--cam-x',camera.currentX.toFixed(2)+'px');
+    active.style.setProperty('--cam-y',camera.currentY.toFixed(2)+'px');
+  }
+  requestAnimationFrame(animateCamera);
+}
+requestAnimationFrame(animateCamera);
+
+window.addEventListener('resize',()=>{
+  updateCameraTarget(
+    window.innerWidth*camera.pointerX,
+    document.getElementById('game').clientHeight*camera.pointerY
+  );
+});
+
 const order=['office','observatory','balcony','library','cabinet'];
 function go(id){
  if(!order.includes(id)) return;
  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
  document.getElementById(id).classList.add('active');
+ camera.currentX *= .35;
+ camera.currentY *= .35;
+ camera.targetX *= .6;
+ camera.targetY *= .6;
 }
 
-/* parallax */
-document.addEventListener('mousemove',e=>{
- const active=document.querySelector('.scene.active .world');if(!active)return;
- const x=(e.clientX/innerWidth-.5)*-10, y=(e.clientY/innerHeight-.5)*-6;
- active.style.setProperty('--px',x+'px');active.style.setProperty('--py',y+'px');
-});
 /* dust */
 document.querySelectorAll('[data-dust]').forEach(box=>{
  const n=+box.dataset.dust;
@@ -20,7 +91,13 @@ document.querySelectorAll('[data-dust]').forEach(box=>{
 });
 /* city */
 const city=document.getElementById('city');
-[42,57,32,68,48,77,54,37,70,44,82,60,51,73,39,64,86,55,46,71,49,66,41,78,58,52,69,45,74].forEach((h,i)=>{const d=document.createElement('div');d.className='bld';d.style.height=h+'%';if(i%5===0)d.style.flex='1.4';city.appendChild(d)});
+const cityFar=document.getElementById('cityFar');
+[42,57,32,68,48,77,54,37,70,44,82,60,51,73,39,64,86,55,46,71,49,66,41,78,58,52,69,45,74].forEach((h,i)=>{
+ const d=document.createElement('div');d.className='bld';d.style.height=h+'%';if(i%5===0)d.style.flex='1.4';city.appendChild(d)
+});
+[35,50,42,62,47,54,39,67,45,58,71,38,52,64,43,57,49,69,41,55,63,46].forEach((h,i)=>{
+ const d=document.createElement('div');d.className='bld';d.style.height=h+'%';if(i%4===0)d.style.flex='1.3';cityFar.appendChild(d)
+});
 
 /* modal */
 function openModal(t,body,k='Archive entry'){document.getElementById('mt').textContent=t;document.getElementById('mk').textContent=k;document.getElementById('mb').innerHTML='<p>'+body+'</p>';document.getElementById('modal').classList.add('show')}
