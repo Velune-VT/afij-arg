@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>AFIJ Storybook Rooms</title>
+<style id="afij-transparency-bootstrap">
+html,body{margin:0;background:transparent!important;background-color:transparent!important}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="background:transparent;">
+<div id="game">
+
+ <section id="office" class="scene">
+  <div class="world">
+   <div class="office-bg"></div><div class="beam"></div><div class="walltrim"></div>
+   <div class="crooked-beam cb1"></div><div class="crooked-beam cb2"></div>
+   <div class="office-window"></div>
+   <div class="wall-clock"><i></i><b></b></div>
+   <div class="portrait p-one"></div><div class="portrait p-two"></div>
+   <div class="filetower ft-one"></div><div class="filetower ft-two"></div>
+   <div class="little-plant"></div>
+   <div class="office-cork"><div class="pin a">VICTIM 01<br><br>Rail receipt</div><div class="pin b">NORTHSHIRE<br><br>Observatory map</div><div class="pin c">?</div><div class="pin d">Witness statement</div><div class="pin e">Blue feather</div><span class="red r1"></span><span class="red r2"></span><span class="red r3"></span></div>
+   <div class="desk"><div class="paperpile"></div><div class="cup"></div><div class="lamp flicker"></div></div><div class="office-fg"></div>
+   <div class="dust" data-dust="12"></div>
+   <button id="oh1" class="hot" onclick="openCork()"></button>
+   <button id="oh2" class="hot" onclick="openModal('The Desk','Reports. Railway schedules. Three empty coffee cups. Whoever owns this desk has not slept much.','Examine')"></button>
+   <button id="oh3" class="hot" onclick="openModal('Office Window','Monochrome glitters beyond the glass. From this height, it is easy to forget people are disappearing.','Examine')"></button>
+  </div>
+  <button class="edge left" onclick="go('cabinet')">‹<b>Cabinet</b></button>
+ </section>
+
+ <section id="observatory" class="scene">
+  <div class="world">
+   <div class="obs-bg"></div><div class="dome"></div><div class="obs-floor"></div>
+   <div class="orrery"><i></i><i></i><i></i></div>
+   <div class="obs-chart chart-a"></div><div class="obs-chart chart-b"></div>
+   <div class="obs-books"></div><div class="obs-railing"></div>
+   <div class="const ca"><i class="twinkle"></i><i></i><i></i></div><div class="const cb"><i></i><i class="twinkle"></i><i></i></div><div class="const cc"><i></i><i></i><i class="twinkle"></i></div>
+   <div class="tele"><div class="tube"></div><div class="leg l1"></div><div class="leg l2"></div><div class="leg l3"></div></div><div class="dust" data-dust="9"></div>
+   <button id="ch1" class="hot" onclick="openModal('Liliana — The Lantern Sister','Sailors say Liliana’s stars brighten when someone is searching for a way home. Her constellation is associated with mercy, memory, and what people choose to preserve.','Constellation record')"></button>
+   <button id="ch2" class="hot" onclick="openModal('Asteria — The Blue Flame','Asteria is drawn as a falling flame split into three stars. Old records connect her to impossible luck, rebellion, and souls that refuse to remain buried.','Constellation record')"></button>
+   <button id="ch3" class="hot" onclick="openModal('Cyrus — The Broken Crown','Cyrus appears highest during eclipse season. The oldest charts depict a crown with one missing point: power severed from grace.','Constellation record')"></button>
+   <button id="th" class="hot" onclick="openModal('The Telescope','Through the telescope, one star is missing from the official chart. Someone scratched a tiny arrow into the brass casing.','Examine')"></button>
+  </div>
+  <button class="edge up" onclick="go('cabinet')">⌃<b>Cabinet</b></button>
+ </section>
+
+ <section id="balcony" class="scene">
+  <div class="world">
+   <div class="bal-bg"></div>
+   <div class="bal-arch"></div><div class="bal-lantern bl-left"></div><div class="bal-lantern bl-right"></div>
+   <div class="city farcity" id="cityFar"></div><div class="city" id="city"></div>
+   <div class="train"></div><div class="rail"></div><div class="floor"></div>
+   <div class="roof-foreground rf-left"></div><div class="roof-foreground rf-right"></div>
+   <div class="curtL"></div><div class="curtR"></div>
+   <div class="smoke" style="left:34%;bottom:34%;width:90px;height:90px"></div><div class="smoke" style="left:62%;bottom:37%;width:70px;height:70px;animation-delay:-4s"></div>
+   <button id="bh1" class="hot" onclick="openModal('Monochrome at Night','The capital looks almost peaceful from here: railway lights, layered rooftops, distant smoke, and the sea beyond the cliff.','Observe')"></button>
+   <button id="bh2" class="hot" onclick="openModal('A Ribbon Beneath the Rail','A faded ribbon is tied beneath the railing where it cannot be seen from inside. Its knot matches one drawn on the office corkboard.','Hidden detail')"></button>
+  </div>
+  <button class="edge down" onclick="go('cabinet')">⌄<b>Cabinet</b></button>
+ </section>
+
+ <section id="library" class="scene">
+  <div class="world">
+   <div class="lib-bg"></div>
+   <div class="lib-window"><i></i><i></i></div>
+   <div class="banner ban-a"></div><div class="banner ban-b"></div>
+   <div class="frame-art"></div>
+   <div class="stackL" id="leftShelf"></div><div class="stackR" id="rightShelf"></div>
+   <div class="centerhall"></div><div class="ladder"></div>
+   <div class="lib-rug"></div>
+   <div class="foreground-books fb-left"></div><div class="foreground-books fb-right"></div>
+   <div class="liblamp flicker"></div><div class="libdesk"><div class="openbook"></div><div class="quill"></div><div class="desk-stack"></div></div>
+   <div class="dust" data-dust="18"></div>
+   <button id="lh" class="hot" onclick="openModal('The Book Left Open','The page describes a railway superstition: “Never answer your own name if it is called from an empty carriage.” A handwritten note underneath adds: “He answered anyway.”','Desk volume')"></button>
+  </div>
+  <button class="edge right" onclick="go('cabinet')">›<b>Cabinet</b></button>
+ </section>
+
+ <section id="cabinet" class="scene active">
+  <div class="world">
+   <div class="cab-bg"></div>
+   <div class="archive-arch"></div>
+   <div class="sidecab l"></div><div class="sidecab r"></div>
+   <div class="archive-box ab-one"></div><div class="archive-box ab-two"></div>
+   <div class="loose-folder lf-one"></div><div class="loose-folder lf-two"></div>
+   <div class="tiny-clock"></div>
+   <div class="hanglamp flicker"></div>
+   <div class="cabmain">
+    <button class="drawer" onclick="drawer(1)"><span class="handle"></span><span class="taglab">CASE I</span></button>
+    <button class="drawer" onclick="drawer(2)"><span class="handle"></span><span class="taglab">CASE II</span></button>
+    <button class="drawer" onclick="drawer(3)"><span class="handle"></span><span class="taglab">CASE III</span></button>
+    <button class="drawer" onclick="drawer(4)"><span class="handle"></span><span class="taglab">CASE IV</span></button>
+    <button class="drawer" onclick="drawer(5)"><span class="handle"></span><span class="taglab">CASE V</span></button>
+    <button class="drawer" onclick="drawer(6)"><span class="handle"></span><span class="taglab">SEALED</span></button>
+   </div><div class="dust" data-dust="10"></div>
+  </div> 
+  <button class="edge left" onclick="go('library')">‹<b>Library</b></button>
+  <button class="edge right" onclick="go('office')">›<b>Office</b></button>
+  <button class="edge up" onclick="go('balcony')">⌃<b>Balcony</b></button>
+  <button class="edge down" onclick="go('observatory')">⌄<b>Observatory</b></button>
+ </section>
+
+</div>
+
+
+<div class="action-dock" aria-label="Interaction actions">
+ <button type="button" data-action="examine">Examine</button>
+ <button type="button" data-action="read">Read</button>
+ <button type="button" data-action="wonder">Wonder</button>
+</div>
+
+
+<div class="overlay" id="actionModal" onclick="if(event.target.id==='actionModal')closeActionModal()">
+  <div class="panel">
+    <button class="close" type="button" onclick="closeActionModal()">×</button>
+    <div class="kick" id="actionRoom"></div>
+    <h2 class="room-action-title" id="actionTitle"></h2>
+    <div class="room-action-lead" id="actionLead"></div>
+    <div class="room-action-body" id="actionBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="modal" onclick="if(event.target.id==='modal')closeModal()"><div class="panel"><button class="close" onclick="closeModal()">×</button><div class="kick" id="mk"></div><h2 id="mt"></h2><div id="mb"></div></div></div>
+<div class="overlay" id="zoom"><div class="panel"><button class="close" style="z-index:10" onclick="closeZoom()">×</button><div class="corkbig">
+ <button class="znote z1" onclick="inspect(0)"><b>BLUE FEATHER</b><br><br>Recovered beside the sealed platform.</button>
+ <button class="znote z2" onclick="inspect(1)"><b>BROKEN CLOCK</b><br><br>Stopped at 3:17.</button>
+ <button class="znote z3" onclick="inspect(2)"><b>MISSING STAR</b><br><br>Absent from the public chart.</button>
+ <div class="znote z4"><b>WITNESS</b><br><br>“The third bell rang after midnight.”</div><div class="znote z5"><b>ROUTE</b><br><br>Old railway line → Observatory district.</div>
+ <span class="zline zl1"></span><span class="zline zl2"></span><span class="zline zl3"></span>
+ <div class="argstatus" id="argstatus">Inspect the three primary evidence cards.</div><div class="argbar"><input id="argAnswer" placeholder="Enter case keyword..."><button onclick="checkARG()">Submit</button></div>
+</div></div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
