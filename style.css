@@ -356,3 +356,148 @@ html, body {
  #office .world,#observatory .world,#balcony .world,#library .world,#cabinet .world{inset:-7% -8% -8% -8% !important}
  .wall-clock,.p-two,.chart-b,.ban-b,.frame-art{display:none}
 }
+
+
+/* ============================================================
+   CLEAN INTERACTION PASS
+   - fully transparent page shell
+   - decorative scenery never intercepts clicks
+   - interactive objects always sit on top
+   - no hover labels/tooltips
+   ============================================================ */
+
+html,
+body,
+#game {
+  background: transparent !important;
+}
+
+/* Remove any solid "page" shell behind the renderer. */
+body {
+  overflow: hidden;
+}
+
+/* Every decorative child inside the panning canvas ignores pointer input
+   unless explicitly marked interactive. */
+.world > *:not(.hot):not(.cabmain):not(.stackL):not(.stackR) {
+  pointer-events: none !important;
+}
+
+/* Interactive containers must remain live. */
+.cabmain,
+.stackL,
+.stackR,
+.drawer,
+.book,
+.hot {
+  pointer-events: auto !important;
+}
+
+/* Put all primary interactive elements above scenery, grain and atmosphere. */
+.hot {
+  z-index: 120 !important;
+}
+
+.cabmain {
+  z-index: 115 !important;
+  pointer-events: auto !important;
+}
+
+.drawer {
+  position: relative;
+  z-index: 121 !important;
+  pointer-events: auto !important;
+}
+
+.stackL,
+.stackR {
+  z-index: 32 !important;
+  pointer-events: auto !important;
+}
+
+.book.interactive {
+  position: relative;
+  z-index: 122 !important;
+  pointer-events: auto !important;
+}
+
+/* Atmosphere must never block interaction. */
+.dust,
+.smoke,
+.train,
+.scene .world::after,
+.scene::after,
+.beam,
+.city,
+.farcity,
+.rail,
+.floor,
+.curtL,
+.curtR,
+.sidecab,
+.archive-arch,
+.hanglamp,
+.roof-foreground,
+.bal-arch,
+.bal-lantern,
+.obs-railing,
+.lib-rug,
+.foreground-books {
+  pointer-events: none !important;
+}
+
+/* Remove hover labels completely.
+   Objects can still subtly respond to hover, but nothing explains itself. */
+.hot span {
+  display: none !important;
+}
+
+/* Remove button-label style hover feedback from books/drawers too.
+   Keep only a tiny brightness change as a curiosity reward. */
+.hot:hover,
+.hot:focus-visible {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.drawer:hover,
+.drawer:focus-visible {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.book.interactive:hover,
+.book.interactive:focus-visible {
+  transform: translateY(-5px);
+  filter: brightness(1.08);
+  outline: none;
+}
+
+/* Fully transparent action area behind Examine / Read / Wonder. */
+.action-dock {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Let the room itself bleed naturally into Carrd.
+   No opaque frame color is introduced by the program. */
+.scene {
+  background: transparent !important;
+}
+
+/* The feathering stays, but outside it is true transparency. */
+#game {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%) !important;
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%) !important;
+  mask-composite: intersect;
+}

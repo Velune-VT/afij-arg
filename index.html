@@ -7,7 +7,7 @@
 <title>AFIJ Storybook Rooms</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background:transparent;">
 <div id="game">
 
  <section id="office" class="scene">
@@ -22,9 +22,9 @@
    <div class="office-cork"><div class="pin a">VICTIM 01<br><br>Rail receipt</div><div class="pin b">NORTHSHIRE<br><br>Observatory map</div><div class="pin c">?</div><div class="pin d">Witness statement</div><div class="pin e">Blue feather</div><span class="red r1"></span><span class="red r2"></span><span class="red r3"></span></div>
    <div class="desk"><div class="paperpile"></div><div class="cup"></div><div class="lamp flicker"></div></div><div class="office-fg"></div>
    <div class="dust" data-dust="12"></div>
-   <button id="oh1" class="hot" onclick="openCork()"><span>Investigate Corkboard</span></button>
-   <button id="oh2" class="hot" onclick="openModal('The Desk','Reports. Railway schedules. Three empty coffee cups. Whoever owns this desk has not slept much.','Examine')"><span>Examine Desk</span></button>
-   <button id="oh3" class="hot" onclick="openModal('Office Window','Monochrome glitters beyond the glass. From this height, it is easy to forget people are disappearing.','Examine')"><span>Look Outside</span></button>
+   <button id="oh1" class="hot" onclick="openCork()"></button>
+   <button id="oh2" class="hot" onclick="openModal('The Desk','Reports. Railway schedules. Three empty coffee cups. Whoever owns this desk has not slept much.','Examine')"></button>
+   <button id="oh3" class="hot" onclick="openModal('Office Window','Monochrome glitters beyond the glass. From this height, it is easy to forget people are disappearing.','Examine')"></button>
   </div>
   <button class="edge left" onclick="go('cabinet')">‹<b>Cabinet</b></button>
  </section>
@@ -37,10 +37,10 @@
    <div class="obs-books"></div><div class="obs-railing"></div>
    <div class="const ca"><i class="twinkle"></i><i></i><i></i></div><div class="const cb"><i></i><i class="twinkle"></i><i></i></div><div class="const cc"><i></i><i></i><i class="twinkle"></i></div>
    <div class="tele"><div class="tube"></div><div class="leg l1"></div><div class="leg l2"></div><div class="leg l3"></div></div><div class="dust" data-dust="9"></div>
-   <button id="ch1" class="hot" onclick="openModal('Liliana — The Lantern Sister','Sailors say Liliana’s stars brighten when someone is searching for a way home. Her constellation is associated with mercy, memory, and what people choose to preserve.','Constellation record')"><span>Liliana</span></button>
-   <button id="ch2" class="hot" onclick="openModal('Asteria — The Blue Flame','Asteria is drawn as a falling flame split into three stars. Old records connect her to impossible luck, rebellion, and souls that refuse to remain buried.','Constellation record')"><span>Asteria</span></button>
-   <button id="ch3" class="hot" onclick="openModal('Cyrus — The Broken Crown','Cyrus appears highest during eclipse season. The oldest charts depict a crown with one missing point: power severed from grace.','Constellation record')"><span>Cyrus</span></button>
-   <button id="th" class="hot" onclick="openModal('The Telescope','Through the telescope, one star is missing from the official chart. Someone scratched a tiny arrow into the brass casing.','Examine')"><span>Use Telescope</span></button>
+   <button id="ch1" class="hot" onclick="openModal('Liliana — The Lantern Sister','Sailors say Liliana’s stars brighten when someone is searching for a way home. Her constellation is associated with mercy, memory, and what people choose to preserve.','Constellation record')"></button>
+   <button id="ch2" class="hot" onclick="openModal('Asteria — The Blue Flame','Asteria is drawn as a falling flame split into three stars. Old records connect her to impossible luck, rebellion, and souls that refuse to remain buried.','Constellation record')"></button>
+   <button id="ch3" class="hot" onclick="openModal('Cyrus — The Broken Crown','Cyrus appears highest during eclipse season. The oldest charts depict a crown with one missing point: power severed from grace.','Constellation record')"></button>
+   <button id="th" class="hot" onclick="openModal('The Telescope','Through the telescope, one star is missing from the official chart. Someone scratched a tiny arrow into the brass casing.','Examine')"></button>
   </div>
   <button class="edge up" onclick="go('cabinet')">⌃<b>Cabinet</b></button>
  </section>
@@ -54,8 +54,8 @@
    <div class="roof-foreground rf-left"></div><div class="roof-foreground rf-right"></div>
    <div class="curtL"></div><div class="curtR"></div>
    <div class="smoke" style="left:34%;bottom:34%;width:90px;height:90px"></div><div class="smoke" style="left:62%;bottom:37%;width:70px;height:70px;animation-delay:-4s"></div>
-   <button id="bh1" class="hot" onclick="openModal('Monochrome at Night','The capital looks almost peaceful from here: railway lights, layered rooftops, distant smoke, and the sea beyond the cliff.','Observe')"><span>Observe City</span></button>
-   <button id="bh2" class="hot" onclick="openModal('A Ribbon Beneath the Rail','A faded ribbon is tied beneath the railing where it cannot be seen from inside. Its knot matches one drawn on the office corkboard.','Hidden detail')"><span>Examine Railing</span></button>
+   <button id="bh1" class="hot" onclick="openModal('Monochrome at Night','The capital looks almost peaceful from here: railway lights, layered rooftops, distant smoke, and the sea beyond the cliff.','Observe')"></button>
+   <button id="bh2" class="hot" onclick="openModal('A Ribbon Beneath the Rail','A faded ribbon is tied beneath the railing where it cannot be seen from inside. Its knot matches one drawn on the office corkboard.','Hidden detail')"></button>
   </div>
   <button class="edge down" onclick="go('cabinet')">⌄<b>Cabinet</b></button>
  </section>
@@ -72,7 +72,7 @@
    <div class="foreground-books fb-left"></div><div class="foreground-books fb-right"></div>
    <div class="liblamp flicker"></div><div class="libdesk"><div class="openbook"></div><div class="quill"></div><div class="desk-stack"></div></div>
    <div class="dust" data-dust="18"></div>
-   <button id="lh" class="hot" onclick="openModal('The Book Left Open','The page describes a railway superstition: “Never answer your own name if it is called from an empty carriage.” A handwritten note underneath adds: “He answered anyway.”','Desk volume')"><span>Read Open Book</span></button>
+   <button id="lh" class="hot" onclick="openModal('The Book Left Open','The page describes a railway superstition: “Never answer your own name if it is called from an empty carriage.” A handwritten note underneath adds: “He answered anyway.”','Desk volume')"></button>
   </div>
   <button class="edge right" onclick="go('cabinet')">›<b>Cabinet</b></button>
  </section>

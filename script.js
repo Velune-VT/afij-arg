@@ -1,4 +1,28 @@
 
+/* Defensive interaction setup */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.drawer,.book.interactive,.hot').forEach(el=>{
+    el.style.pointerEvents='auto';
+    if(el.tagName === 'BUTTON' && !el.hasAttribute('type')) el.type='button';
+  });
+
+  document.querySelectorAll('.world > *').forEach(el=>{
+    if(
+      !el.classList.contains('hot') &&
+      !el.classList.contains('cabmain') &&
+      !el.classList.contains('stackL') &&
+      !el.classList.contains('stackR')
+    ){
+      el.style.pointerEvents='none';
+    }
+  });
+
+  document.querySelectorAll('.cabmain,.stackL,.stackR,.drawer,.book.interactive,.hot').forEach(el=>{
+    el.style.pointerEvents='auto';
+  });
+});
+
+
 /* ============================================================
    EXPANSIVE POINT-AND-CLICK CAMERA
    The pointer acts like the player's gaze. The room is larger
