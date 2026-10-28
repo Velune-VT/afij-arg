@@ -1,6 +1,6 @@
 import {pointerPan,scenePoint,poseAtPoint} from './camera-math.js?v=19';
 
-const mobile=matchMedia('(max-width:760px),(max-width:980px) and (pointer:coarse),(max-width:980px) and (max-height:540px)');
+const mobile=window.afijLayout;
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 const scene=document.querySelector('.archive-scene');
 const drawers=document.getElementById('drawers');
