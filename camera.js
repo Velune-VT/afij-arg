@@ -1,4 +1,4 @@
-import {pointerPan,scenePoint,poseAtPoint} from './camera-math.js?v=17';
+import {pointerPan,scenePoint,poseAtPoint} from './camera-math.js?v=19';
 
 const mobile=matchMedia('(max-width:760px),(max-width:980px) and (pointer:coarse),(max-width:980px) and (max-height:540px)');
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
@@ -52,7 +52,7 @@ function focusPose(drawer){
   const bounds=scene.getBoundingClientRect();
   const rect=drawer.getBoundingClientRect();
   const point=scenePoint(rect.left-bounds.left+rect.width*.5,rect.top-bounds.top+rect.height*.55,bounds.width,bounds.height,motion);
-  return poseAtPoint(point,bounds.width,bounds.height,2.85);
+  return poseAtPoint(point,bounds.width,bounds.height,2.65);
 }
 function syncDrawerFocus(){
   const expanded=mobile.matches?null:drawers.querySelector('.drawer.expanded');
