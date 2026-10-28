@@ -1,0 +1,3 @@
+.room-renderer{overflow:clip}
+.archive-camera{position:absolute;inset:0;transform:translate3d(var(--camera-x,0px),var(--camera-y,0px),0) scale(var(--camera-zoom,1.9));transform-origin:50% 50%}
+.archive-camera.camera-transition .drawer.expanded .drawer-file{pointer-events:none}

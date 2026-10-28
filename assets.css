@@ -1,5 +1,6 @@
 /* Supplied archive artwork uses a single 1419 by 750 coordinate system. */
 html,body,button,input,textarea,select{font-family:"Fraunces",serif}
+.mobile-profile-zoom{display:none}
 #game{height:100vh;height:100dvh}
 .room-renderer{container-type:size;isolation:isolate;border-radius:0;-webkit-mask-image:none;mask-image:none}
 .world{inset:0;display:grid;place-items:center;transform:none;animation:none}
