@@ -52,7 +52,8 @@ html[data-layout="mobile"] .credit-list{font-size:14px}
 html[data-layout="mobile"] .credits-view h3{font-size:16px}
 html[data-layout="mobile"] .credits-view .creator-name{font-size:20px}
 html[data-layout="mobile"] .credit-list>div{grid-template-columns:minmax(105px,.8fr) minmax(0,1.2fr);gap:10px}
-html[data-layout="mobile"] .credits-view .file-footer{position:static;margin:8px 0 0;padding:4px 0 0;background:none}
+html[data-layout="mobile"] .credits-view .file-footer{position:absolute;top:10px;right:12px;margin:0;padding:0;background:none}
+html[data-layout="mobile"] .credits-view #fileKick,html[data-layout="mobile"] .credits-view #fileTitle{padding-right:144px;text-align:left}
 html[data-layout="mobile"] .credits-view .close-file{width:132px;height:44px}
 html[data-layout="mobile"] .profile-view{padding:0;touch-action:pan-x pan-y}
 html[data-layout="mobile"] .profile-view .panel{left:calc(var(--file-stage-x) + 8px);top:calc(var(--file-stage-y) + 8px);width:calc(var(--file-stage-width) - 16px);height:calc(var(--file-stage-height) - 16px);max-height:none;display:flex;flex-direction:column;padding:8px;border-radius:12px;overflow:hidden;touch-action:pan-x pan-y}

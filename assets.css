@@ -41,9 +41,13 @@ html,body,button,input,textarea,select{font-family:"Fraunces",serif}
 .credits-view .panel{position:fixed;left:calc(var(--file-stage-x) + var(--file-stage-width)*.5);top:calc(var(--file-stage-y) + var(--file-stage-height)*.04);transform:translateX(-50%);width:min(680px,calc(var(--file-stage-width)*.8));height:calc(var(--file-stage-height)*.92);max-height:none;display:flex;flex-direction:column;overflow:hidden;padding:24px 26px 18px}
 .credits-view #fileBody{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 8px;scrollbar-width:thin}
 .credits-view #fileBody:focus-visible{outline:1px solid #c9a76980;outline-offset:-1px}
-.credits-view #fileKick,.credits-view #fileTitle{text-align:center}
+.credits-view #fileKick,.credits-view #fileTitle{text-align:left;padding-right:180px}
 .credits-intro{text-align:center}
 .credits-logo{display:block;width:200px;max-width:56%;height:auto;margin:8px auto 16px;padding:0;background:transparent;border:0;border-radius:0;opacity:1}
+.credits-logo-link{display:block;width:200px;max-width:56%;margin:8px auto 16px}
+.credits-logo-link .credits-logo{width:100%;max-width:none;margin:0}
+.credits-logo-link:focus-visible{outline:2px solid #dfc58e;outline-offset:4px;border-radius:8px}
+.creator-name a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 .credits-subtitle{margin:0 0 18px;color:#d0b88d!important;font-style:italic}
 .credits-view h3{margin:18px 0 10px;color:#dfc595;font-size:17px;font-weight:normal;letter-spacing:.025em}
 .credits-view .creator-name{margin:4px 0 24px;font-size:22px}
@@ -56,7 +60,7 @@ html,body,button,input,textarea,select{font-family:"Fraunces",serif}
 .credits-handles{margin:0 0 18px;color:#cbb798!important;font-size:13px!important;text-align:center}
 .credit-section a{color:#dfc595;text-decoration:underline;text-underline-offset:3px}
 .credit-section a:hover,.credit-section a:focus-visible{color:#fff0cb;outline-offset:4px}
-.credits-view .file-footer{position:static;flex:none;z-index:5;margin:8px 0 0;padding:4px 0 0;background:none;text-align:right}
+.credits-view .file-footer{position:absolute;top:12px;right:18px;flex:none;z-index:5;margin:0;padding:0;background:none;text-align:right}
 .credits-view .close-file{margin-top:0}
 .credits-view .close-file{width:172px;height:52px}
 

@@ -59,7 +59,8 @@
     }
     const button=document.createElement('button');button.type='button';button.className='close';button.textContent='Close File';button.setAttribute('aria-label','Close File');button.addEventListener('click',()=>close());footer.append(button);
     host.style.setProperty('--close-art',`url('${new URL('Assets/Close File.png',base).href}')`);
-    reader.append(kick,title,content,footer);veil.append(reader);shadow.append(style,veil);
+    if(data.kind==='credits')reader.append(footer,kick,title,content);else reader.append(kick,title,content,footer);
+    veil.append(reader);shadow.append(style,veil);
     const background=[...document.body.children].map(el=>[el,el.inert]);const bodyStyle={};for(const key of ['position','top','left','width','overflow'])bodyStyle[key]=document.body.style[key];
     const scrollX=window.scrollX,scrollY=window.scrollY;
     active={id:data.id,host,shadow,background,bodyStyle,scrollX,scrollY};
